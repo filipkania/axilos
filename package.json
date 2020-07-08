@@ -1,0 +1,50 @@
+{
+  "name": "axilos",
+  "version": "0.1.0",
+  "description": "better browser with less cpu usage and great design.",
+  "main": "electron/index.electron.js",
+  "scripts": {
+    "dev:start": "NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --mode development",
+    "dev:electron_start": "NODE_ENV=development electron .",
+    "prod:start": "electron .",
+    "dev:build": "webpack --config webpack.config.dev.js",
+    "pack": "npm run dev:build && electron-builder",
+    "pack:darwin": "npm run dev:build && electron-builder -m",
+    "pack:win": "npm run dev:build && electron-builder -w",
+    "pack:linux": "npm run dev:build && electron-builder -l",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filipkania/axilos.git"
+  },
+  "author": "Filip Kania <https://github.com/filipkania>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/filipkania/axilos/issues"
+  },
+  "homepage": "https://github.com/filipkania/axilos#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "css-loader": "^3.6.0",
+    "electron": "^9.1.0",
+    "electron-builder": "^22.7.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
+    "typescript": "^3.9.6",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

@@ -1,0 +1,21 @@
+{
+    "appId": "com.filipkania.axilos",
+    "productName": "Axilos",
+    "copyright": "Copyright © 2020 Filip Kania",
+    "files": [
+        "build/**",
+        "electron/**",
+        "package.json",
+        "public/**"
+    ],
+    "mac": {
+        "icon": "public/img/axilos_logo.png",
+        "darkModeSupport": true
+    },
+    "windows": {
+        "icon": "public/img/axilos_logo.ico"
+    },
+    "linux": {
+        "icon": "public/img/axilos_logo.png"
+    }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pogchapm</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script>
+            const path = window.require('path');
+            const url = window.require('url');
+
+            let s = document.createElement('script');
+            if (process.env.NODE_ENV === "development")
+                s.src = "/js/main.bundle.js";
+            else
+                s.src = url.format({
+                    pathname: path.join(__dirname, '/js/main.bundle.js'),
+                    protocol: 'file:',
+                    slashes: true
+                });
+
+            document.body.appendChild(s);
+        </script>
+    </body>
+</html>
