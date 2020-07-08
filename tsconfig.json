@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist/",
+      "noImplicitAny": true,
+      "lib": [
+        "es5", "es6", "dom", "dom.iterable"
+      ],
+      "module": "esnext",
+      "target": "es5",
+      "jsx": "react",
+      "esModuleInterop": true,
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true
+    },
+    "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}

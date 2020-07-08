@@ -1,0 +1,17 @@
+@import '../_variables';
+
+div.FirstLaunch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    height: 100vh;
+    width: 100vw;
+    background: $background;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}

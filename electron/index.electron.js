@@ -1,5 +1,5 @@
 const { app } = require('electron');
-const Window = require('./window');
+const Window = require('./functions/window');
 
 let windows = [];
 

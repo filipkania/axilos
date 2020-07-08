@@ -6,8 +6,8 @@
   "scripts": {
     "dev:start": "NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --mode development",
     "dev:electron_start": "NODE_ENV=development electron .",
+    "dev:build": "webpack --config webpack.config.prod.js",
     "prod:start": "electron .",
-    "dev:build": "webpack --config webpack.config.dev.js",
     "pack": "npm run dev:build && electron-builder",
     "pack:darwin": "npm run dev:build && electron-builder -m",
     "pack:win": "npm run dev:build && electron-builder -w",
@@ -29,22 +29,26 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@types/react": "^16.9.41",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
     "electron": "^9.1.0",
     "electron-builder": "^22.7.0",
+    "file-loader": "^6.0.0",
+    "lowdb": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-spring": "^8.0.27",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.5",
     "typescript": "^3.9.6",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  }
+  "dependencies": {}
 }
