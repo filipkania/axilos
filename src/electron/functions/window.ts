@@ -17,13 +17,14 @@ class ElectronWindow {
         this.appWindow = new BrowserWindow({
             width: 800,
             height: 600,
-            titleBarStyle: 'hiddenInset',
             transparent: true,
+            titleBarStyle: 'hiddenInset',
+            frame: false,
             webPreferences: {
               nodeIntegration: true,
             },
             show: false,
-            icon: path.join(app.getAppPath(), "build/img/axilos_logo_256.png")//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
+            icon: path.join(app.getAppPath(), `build/img/axilos_logo${process.env.NODE_ENV === "development" ? "_nightly" : ""}_256.png`)//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
         });
         
         url = urlLib.format({

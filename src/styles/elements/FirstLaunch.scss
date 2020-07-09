@@ -27,6 +27,24 @@
         width: auto;
     }
 
+    &__router {
+        height: 400px;
+        width: 500px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top: 70px;
+        .title {
+            width: 100%;
+            text-align: center;
+        }
+        .content {
+            text-align: left;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
     .Buttons {
         width: 100vw;
         height: 5rem;

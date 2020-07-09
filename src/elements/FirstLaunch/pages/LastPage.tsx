@@ -3,7 +3,7 @@ import React from 'react';
 const LastPage = () => {
     return (
         <div className="LastPage">
-            <h1>Thanks!</h1>
+            <h1>ostatnia strona pog</h1>
         </div>
     );
 }

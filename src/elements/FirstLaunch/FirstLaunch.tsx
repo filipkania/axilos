@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSpring, useTransition, animated } from 'react-spring';
+import { useSpring,  animated } from 'react-spring';
 import useLanguage from '../../functions/useLanguage';
 import { ElectronProps } from '../../types/index';
 
@@ -52,7 +52,7 @@ const FirstLaunch = ({ options, setOptions }: {
                 <animated.h1 style={{ opacity: TextOpacity }}>{lang.NAME} </animated.h1>
             </animated.div>
             
-            <animated.div style={pageAnimation}>
+            <animated.div className="FirstLaunch__router" style={pageAnimation}>
                 {pages[page]}
             </animated.div>
 
