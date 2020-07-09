@@ -2,6 +2,9 @@
     "appId": "com.filipkania.axilos",
     "productName": "Axilos",
     "copyright": "Copyright © 2020 Filip Kania",
+    "directories": {
+        "output": "dist/${productName}-${channel}.${version}/${os}_${arch}",
+    },
     "files": [
         "build/**"
     ],

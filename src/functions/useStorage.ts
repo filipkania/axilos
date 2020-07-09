@@ -2,10 +2,9 @@ import Lowdb from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 
 import path from 'path';
-const { app } = window.require('electron').remote;
+const { app } = require('electron').remote;
 
 const useStorage = (database:String) => {
-
     const adapter = new FileSync(path.join(app.getPath("appData"), "/axilos/", `${database.toLowerCase()}.json`));
     const db = Lowdb(adapter);
 

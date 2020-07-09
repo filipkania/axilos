@@ -1,6 +1,7 @@
 import Electron, { BrowserWindow, app } from 'electron';
-const path = require('path');
-const urlLib = require('url');
+import path from 'path';
+import { default as urlLib } from 'url';
+
 import useStorage from './useStorage';
 const storage = useStorage("options");
 
@@ -22,7 +23,7 @@ class ElectronWindow {
               nodeIntegration: true,
             },
             show: false,
-            icon: (process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
+            icon: path.join(app.getAppPath(), "build/img/axilos_500x500.png")//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
         });
         
         if (process.env.NODE_ENV === 'development')
@@ -34,14 +35,10 @@ class ElectronWindow {
                 slashes: true
             });
 
-        console.log(app.getAppPath())
-
         props.firstRun = this.isFirstRun();
-
         url += "?props=" + JSON.stringify(props);
 
         this.appWindow.once('ready-to-show', this.appWindow.show);
-
         this.appWindow.loadURL(url);
           
         this.appWindow.on('closed', () => {

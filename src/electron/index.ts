@@ -1,6 +1,5 @@
-const { app, protocol } = require('electron');
+const { app } = require('electron');
 import ElectronWindow from './functions/window';
-import path from 'path';
 
 let windows = [];
 

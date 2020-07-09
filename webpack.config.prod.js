@@ -1,6 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const urlLib = require('url');
+const rimraf = require('rimraf');
 
 module.exports = {
     mode: 'production',
@@ -69,6 +69,13 @@ module.exports = {
             patterns: [
                 'public/',
             ]
-        })
+        }),
+        {
+            apply: c => 
+                c.hooks.beforeRun.tapAsync("restart_electron", (_, cb) => {
+                    console.log(`Removing old build folder: ${path.join(__dirname, 'build/')}`);
+                    rimraf(path.join(__dirname, 'build/'), cb);
+                })
+        }
     ],
 };

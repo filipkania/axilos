@@ -1,6 +1,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const rimraf = require('rimraf');
 
 let proc;
 
@@ -95,6 +96,13 @@ module.exports = [
                                 shell: true,
                                 stdio: "inherit"
                             });
+                    })
+            },
+            {
+                apply: c => 
+                    c.hooks.beforeCompile.tapAsync("restart_electron", (_, cb) => {
+                        console.log(`Removing old build folder: ${path.join(__dirname, 'build/')}`);
+                        rimraf(path.join(__dirname, 'build/'), cb);
                     })
             }
         ],
