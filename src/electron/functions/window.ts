@@ -21,6 +21,7 @@ class ElectronWindow {
             webPreferences: {
               nodeIntegration: true,
             },
+            show: false,
             icon: (process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
         });
         
@@ -38,6 +39,8 @@ class ElectronWindow {
         props.firstRun = this.isFirstRun();
 
         url += "?props=" + JSON.stringify(props);
+
+        this.appWindow.once('ready-to-show', this.appWindow.show);
 
         this.appWindow.loadURL(url);
           

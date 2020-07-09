@@ -2,12 +2,11 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import ReactDOM from 'react-dom';
-import useStorage from './functions/useStorage';
 
 import DragToolbar from './elements/DragToolbar';
 import FirstLaunch from './elements/FirstLaunch';
 
-import './styles/router.scss'; 
+import './styles/index.scss'; 
 import { ElectronProps } from './types/index';
 
 const App = () => {

@@ -23,6 +23,9 @@ module.exports = [
         target: 'electron-main',
         devtool: 'source-map',
         cache: false,
+        node: {
+            __dirname: true
+        },
         module: {
             rules: [
                 {
@@ -46,15 +49,16 @@ module.exports = [
                     use: [
                         'style-loader',
                         'css-loader',
-                        'sass-loader',
+                        'sass-loader'
                     ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|jp2|webp)$/,
+                    test: /\.(png|jpe?g|gif|jp2|webp|woff2|ttf)$/,
                     loader: 'file-loader',
                     options: {
-                        outputPath: (url) => path.join(__dirname, 'build', url)
-                    }
+                        esModule: false,
+                        publicPath: url => url
+                    },
                 },
             ],
         },

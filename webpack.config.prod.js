@@ -46,20 +46,16 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
-                    'sass-loader',
+                    'sass-loader'
                 ],
             },
             {
-                test: /\.(png|jpe?g|gif|jp2|webp)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            esModule: false,
-                            publicPath: url => url
-                        },
-                    },
-                ],
+                test: /\.(png|jpe?g|gif|jp2|webp|woff2|ttf)$/,
+                loader: 'file-loader',
+                options: {
+                    esModule: false,
+                    publicPath: url => url
+                },
             },
         ],
     },
