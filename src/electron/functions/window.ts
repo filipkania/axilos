@@ -1,14 +1,19 @@
-const { BrowserWindow } = require('electron');
+import Electron, { BrowserWindow } from 'electron';
 const path = require('path');
 const urlLib = require('url');
-const useStorage = require('./useStorage');
+import useStorage from './useStorage';
 const storage = useStorage("options");
 
-class Window {
-    constructor(props = {}) {
+class ElectronWindow {
+    public appWindow: Electron.BrowserWindow;
+
+    constructor(props:{
+        incognito?: boolean,
+        firstRun?: boolean
+    } = {}) {
         let url;
 
-        this.window = new BrowserWindow({
+        this.appWindow = new BrowserWindow({
             width: 800,
             height: 600,
             titleBarStyle: 'hiddenInset',
@@ -21,9 +26,9 @@ class Window {
         
         if (process.env.NODE_ENV === 'development')
             url = `http://localhost:3000`;
-        else 
+        else
             url = urlLib.format({
-                pathname: path.join(__dirname, '../../build/index.html'),
+                pathname: path.resolve(__dirname, 'index.html'),
                 protocol: 'file:',
                 slashes: true
             });
@@ -32,10 +37,10 @@ class Window {
 
         url += "?props=" + JSON.stringify(props);
 
-        this.window.loadURL(url);
+        this.appWindow.loadURL(url);
           
-        this.window.on('closed', () => {
-            this.window = null;
+        this.appWindow.on('closed', () => {
+            this.appWindow = null;
         });
     }
 
@@ -46,4 +51,4 @@ class Window {
     isFirstRun = () => !storage.get('verified').value()
 }
 
-module.exports = Window;
+export default ElectronWindow;

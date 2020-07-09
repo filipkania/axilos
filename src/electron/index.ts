@@ -1,9 +1,9 @@
 const { app } = require('electron');
-const Window = require('./functions/window');
+import ElectronWindow from './functions/window';
 
 let windows = [];
 
 app.on('ready', () => {
-    windows.push(new Window());
+    windows.push(new ElectronWindow());
 });
 app.allowRendererProcessReuse = true;

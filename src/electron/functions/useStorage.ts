@@ -1,13 +1,13 @@
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
+import Lowdb from 'lowdb';
+import FileSync from 'lowdb/adapters/FileSync';
 
-const path = require('path');
-const { app } = require('electron');
+import path from 'path';
+import { app } from 'electron';
 
 const useStorage = (database = "options") => {
 
     const adapter = new FileSync(path.join(app.getPath("appData"), "/axilos/", `${database.toLowerCase()}.json`));
-    const db = low(adapter);
+    const db = Lowdb(adapter);
 
     let def = require(`../storage/${database.toLowerCase()}.json`);
     db.defaults(def).write();
@@ -15,4 +15,4 @@ const useStorage = (database = "options") => {
     return db;
 }
 
-module.exports = useStorage;
+export default useStorage;

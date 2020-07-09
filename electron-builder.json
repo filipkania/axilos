@@ -3,10 +3,7 @@
     "productName": "Axilos",
     "copyright": "Copyright © 2020 Filip Kania",
     "files": [
-        "build/**",
-        "electron/**",
-        "package.json",
-        "public/**"
+        "build/**"
     ],
     "mac": {
         "icon": "public/img/axilos_logo.png",
