@@ -6,13 +6,14 @@
   "scripts": {
     "dev:start": "NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --mode development",
     "dev:electron_start": "NODE_ENV=development electron .",
+    "dev:build": "NODE_ENV=development webpack --config webpack.config.dev.js",
+    "dev:pack": "npm run dev:build && electron-builder -m",
     "prod:build": "webpack --config webpack.config.prod.js",
     "prod:start": "electron .",
     "pack": "npm run prod:build && electron-builder",
     "pack:darwin": "npm run prod:build && electron-builder -m",
     "pack:win": "npm run prod:build && electron-builder -w",
-    "pack:linux": "npm run prod:build && electron-builder -l",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pack:linux": "npm run prod:build && electron-builder -l"
   },
   "repository": {
     "type": "git",

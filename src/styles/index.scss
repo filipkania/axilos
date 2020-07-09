@@ -1,15 +1,37 @@
-@import 'variables.scss';
 @import 'fonts.scss';
+
+div#root {
+    --background: #eaeaea;
+    --background-contrast: #d8d8d8;
+
+    --text-color: #1d1e22;
+}
+
+div#root[dark-theme="true"] {
+    --background: #1d1e22;
+    --background-contrast: #3b3d46;
+
+    --text-color: #eaeaea;
+}
 
 body {
     width: 100vw;
     height: 100vh;
     margin: 0;
-    background-color: $background;
-
     font-family: "Source Sans Pro";
 }
 
 div#root {
-     
+    transition: color 150ms ease-in-out; 
+
+    height: 100vh;
+    width: 100vw;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--background);
+    color: var(--text-color);
+
+    overflow: hidden;
 }
