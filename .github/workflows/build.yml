@@ -23,5 +23,3 @@ jobs:
       run: npm i 
     - name: Build with production config of WebPack
       run: npm run prod:build
-    - name: Program start
-      run: npm run prod:start
