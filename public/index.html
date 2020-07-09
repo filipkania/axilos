@@ -14,7 +14,7 @@
                 s.src = "/js/main.bundle.js";
             else
                 s.src = url.format({
-                    pathname: path.join(__dirname, '/js/main.bundle.js'),
+                    pathname: path.join(window.__dirname, '/js/main.bundle.js'),
                     protocol: 'file:',
                     slashes: true
                 });

@@ -12,7 +12,8 @@ const FirstLaunch = ({ options, setOptions }: {
     setOptions: React.Dispatch<React.SetStateAction<ElectronProps>>
 }) => {
     const lang = useLanguage();
-    const [ display, setDisplay ]:any = useState(true); 
+    const [ display, setDisplay ] = useState<boolean>(true); 
+    const [ page, setPage ] = useState<number>(0);
     const props:any = useSpring({ 
         transform: display ? `translate3d(0,0%,0)` : `translate3d(0,-10%,0)`,
         opacity: display ? 1 : 0,
@@ -29,7 +30,8 @@ const FirstLaunch = ({ options, setOptions }: {
     return (
         <animated.div className="FirstLaunch" style={props}>
             {lang.TEST_LANGUAGE}
-            <button onClick={() => setDisplay(false) && alert('test')}>ad</button>
+            <img src={Logo}/>
+            <button onClick={() => setDisplay(false)}>ad</button>
         </animated.div>
     )
 }

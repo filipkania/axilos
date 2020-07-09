@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const urlLib = require('url');
 
 module.exports = {
     mode: 'production',
@@ -7,22 +8,38 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
         mainFields: ['main', 'module', 'browser'],
     },
-    entry: './src/index.tsx',
-    target: 'electron-renderer',
+    watchOptions: {
+        ignored: [
+            '/node_modules/'
+        ]
+    },
+    entry: {
+        main: './src/App.tsx',
+        electron: './src/electron/index.ts'
+    },
+    target: 'electron-main',
+    devtool: 'source-map',
     cache: false,
+    node: {
+        __dirname: true
+    },
     module: {
         rules: [
             {
                 test: /\.(js|ts|tsx)$/,
-                exclude: /node_modules/,
+                exclude: [
+                    /node_modules/
+                ],
                 use: {
                     loader: 'babel-loader',
                 },
             },
             {
-                test: /\.tsx?$/,
+                test: /\.(tsx|ts)?$/,
                 use: 'ts-loader',
-                exclude: /node_modules/,
+                exclude: [
+                    /node_modules/
+                ],
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -34,7 +51,15 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|jp2|webp)$/,
-                loader: 'url-loader'
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            esModule: false,
+                            publicPath: url => url
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -46,10 +71,8 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                {
-                    from: 'public/'
-                }
+                'public/',
             ]
-        }),
+        })
     ],
 };

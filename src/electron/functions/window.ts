@@ -1,4 +1,4 @@
-import Electron, { BrowserWindow } from 'electron';
+import Electron, { BrowserWindow, app } from 'electron';
 const path = require('path');
 const urlLib = require('url');
 import useStorage from './useStorage';
@@ -28,10 +28,12 @@ class ElectronWindow {
             url = `http://localhost:3000`;
         else
             url = urlLib.format({
-                pathname: path.resolve(__dirname, 'index.html'),
+                pathname: path.join(app.getAppPath(), '/build/index.html'),
                 protocol: 'file:',
                 slashes: true
             });
+
+        console.log(app.getAppPath())
 
         props.firstRun = this.isFirstRun();
 
