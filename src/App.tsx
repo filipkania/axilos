@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import DragToolbar from './elements/DragToolbar';
-import FirstLaunch from './elements/FirstLaunch';
+import FirstLaunch from './elements/FirstLaunch/FirstLaunch';
 
 import './styles/index.scss'; 
 import { ElectronProps } from './types/index';

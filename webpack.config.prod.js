@@ -57,6 +57,10 @@ module.exports = {
                     publicPath: url => url
                 },
             },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader'
+            }
         ],
     },
     output: {

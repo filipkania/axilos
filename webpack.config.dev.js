@@ -2,6 +2,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const rimraf = require('rimraf');
+const webpack = require('webpack');
 
 let proc;
 
@@ -60,7 +61,7 @@ module.exports = [
                         esModule: false,
                         publicPath: url => url
                     },
-                },
+                }
             ],
         },
         devServer: {
@@ -83,6 +84,9 @@ module.exports = [
                 patterns: [
                     'public/',
                 ]
+            }),
+            new webpack.DefinePlugin({
+                NODE_ENV: "development"
             }),
             {
                 apply: c => 

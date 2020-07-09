@@ -1,17 +1,79 @@
-@import '../variables.scss';
 
-div.FirstLaunch {
+.FirstLaunch {
+    transition: background-color 150ms ease-in-out;
     position: absolute;
     top: 0;
     left: 0;
     
     height: 100vh;
     width: 100vw;
-    background: $background;
+    background-color: var(--background);
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     flex-direction: column;
+
+    &__logo-container {
+        position: absolute; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__logo {
+        width: auto;
+    }
+
+    .Buttons {
+        width: 100vw;
+        height: 5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        bottom: 1.5rem;
+        left: 0;
+
+
+        &__b {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 150ms ease-in-out;
+            background-color: transparent;
+
+            &:hover {
+                background-color: var(--background-contrast);
+            }
+
+            &:not(:first-of-type) {
+                margin-left: 1rem;
+            }
+            &.next {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+
+            svg {
+                height: 35px;
+                width: 35px;
+                margin-bottom: .25rem;
+                
+                path {
+                    transition: fill 150ms ease-in-out;
+                    fill: var(--text-color);
+                }
+            }
+        }
+    }
 }

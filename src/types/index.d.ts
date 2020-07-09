@@ -5,3 +5,10 @@ export interface ElectronProps {
     incognito: boolean;
 }
 
+export interface ButtonsProps {
+    page: number;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
+    allPages: number;
+    setDisplay: React.Dispatch<React.SetStateAction<boolean>>;
+    display: boolean;
+}

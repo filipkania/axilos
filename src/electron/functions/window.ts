@@ -23,19 +23,18 @@ class ElectronWindow {
               nodeIntegration: true,
             },
             show: false,
-            icon: path.join(app.getAppPath(), "build/img/axilos_500x500.png")//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
+            icon: path.join(app.getAppPath(), "build/img/axilos_logo_256.png")//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
         });
         
-        if (process.env.NODE_ENV === 'development')
-            url = `http://localhost:3000`;
-        else
-            url = urlLib.format({
-                pathname: path.join(app.getAppPath(), '/build/index.html'),
-                protocol: 'file:',
-                slashes: true
-            });
+        url = urlLib.format({
+            pathname: path.join(app.getAppPath(), '/build/index.html'),
+            protocol: 'file:',
+            slashes: true
+        });
 
         props.firstRun = this.isFirstRun();
+        if (props.firstRun) this.appWindow.setResizable(false);
+
         url += "?props=" + JSON.stringify(props);
 
         this.appWindow.once('ready-to-show', this.appWindow.show);

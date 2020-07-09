@@ -1,17 +1,17 @@
 import { Language } from '../types/language';
 import { getLogo, getName } from '../functions/getNameAndLogo';
 
-const en:Language = {
-    TEST_LANGUAGE: "hi!",
+const pl:Language = {
+    TEST_LANGUAGE: "polska kurka",
     
     LOGO: getLogo(),
     NAME: getName(),
 
     BUTTONS: {
-        NEXT: "Next",
-        PREV: "Back",
-        LETS_START: "Let's start!"
+        NEXT: "Dalej",
+        PREV: "Wróć",
+        LETS_START: "Rozpocznij"
     }
 }
 
-export default en;
+export default pl;
