@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// @ts-ignore
 import { useSpring,  animated } from 'react-spring';
 import useLanguage from '../../functions/useLanguage';
 import { ElectronProps } from '../../types/index';

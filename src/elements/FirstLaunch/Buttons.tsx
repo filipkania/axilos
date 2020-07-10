@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore
 import { useSpring, animated } from 'react-spring';
 
 import ArrowIcon from './ArrowIcon';
