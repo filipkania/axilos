@@ -11,6 +11,16 @@ const en:Language = {
         NEXT: "Next",
         PREV: "Back",
         LETS_START: "Let's start!"
+    },
+
+    INSTALLATION: {
+        APPEARANCE: {
+            DARK: "Dark",
+            LIGHT: "Light",
+            SYSTEM: "Automatically",
+
+            TITLE: "Appearance"
+        }
     }
 }
 

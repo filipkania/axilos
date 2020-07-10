@@ -3,19 +3,19 @@
     "productName": "Axilos",
     "copyright": "Copyright © 2020 Filip Kania",
     "directories": {
-        "output": "dist/${productName}-${channel}.${version}/${os}_${arch}",
+        "output": "dist/${productName}-prod.${version}/${os}_${arch}"
     },
     "files": [
         "build/**"
     ],
     "mac": {
-        "icon": "public/img/axilos_logo.png",
+        "icon": "public/img/axilos_logo_512.png",
         "darkModeSupport": true
     },
     "win": {
         "icon": "public/img/axilos_logo.ico"
     },
     "linux": {
-        "icon": "public/img/axilos_logo.png"
+        "icon": "public/img/axilos_logo_512.png"
     }
 }

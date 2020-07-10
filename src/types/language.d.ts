@@ -1,13 +1,23 @@
 export interface Language {
     
-    TEST_LANGUAGE: String;
+    TEST_LANGUAGE: string;
     
     LOGO: any;
-    NAME: String;
+    NAME: string;
 
     BUTTONS: {
-        NEXT: String;
-        PREV: String;
-        LETS_START: String;
+        NEXT: string;
+        PREV: string;
+        LETS_START: string;
+    }
+
+    INSTALLATION: {
+        APPEARANCE: {
+            DARK: string;
+            LIGHT: string;
+            SYSTEM: string;
+
+            TITLE: string;
+        }
     }
 }

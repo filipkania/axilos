@@ -5,10 +5,13 @@ import ArrowIcon from './ArrowIcon';
 import { ButtonsProps } from '../../types/index';
 
 import useLanguage from '../../functions/useLanguage';
+import useStorage from '../../functions/useStorage';
 
+import { ipcRenderer } from 'electron';
 
 const Buttons = ({ page, setPage, allPages, setDisplay, display }: ButtonsProps) => {
     const lang = useLanguage();
+    const storage = useStorage('options');
     const { transform, opacity } = useSpring({
         transform: (page === 0) ? 'translateX(-50px)' : 'translateX(0px)',
         opacity: (page === 0) ? 0 : 1
@@ -22,8 +25,13 @@ const Buttons = ({ page, setPage, allPages, setDisplay, display }: ButtonsProps)
             </animated.div>
 
             <div className="Buttons__b next" onClick={() => {
-                if (page === allPages - 1 && display === true)
-                    return setDisplay(false);
+                if (page === allPages - 1 && display === true) {
+                    setDisplay(false);
+
+                    ipcRenderer.send('verification-completed', '');
+
+                    return; 
+                }
                 
                 setPage(s => ++s)
             }}>

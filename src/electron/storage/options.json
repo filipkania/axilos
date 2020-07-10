@@ -1,4 +1,10 @@
 {
     "verified": false,
-    "user": []
+    "user": {
+        "options": {
+            "height": null,
+            "width": null,
+            "darkTheme": null
+        } 
+    }
 }

@@ -1,0 +1,21 @@
+{
+    "appId": "com.filipkania.axilos.nightly",
+    "productName": "Axilos Nightly",
+    "copyright": "Copyright © 2020 Filip Kania",
+    "directories": {
+        "output": "dist/${productName}-nightly.${version}/${os}_${arch}"
+    },
+    "files": [
+        "build/**"
+    ],
+    "mac": {
+        "icon": "public/img/axilos_logo_nightly_512.png",
+        "darkModeSupport": true
+    },
+    "win": {
+        "icon": "public/img/axilos_logo_nightly.ico"
+    },
+    "linux": {
+        "icon": "public/img/axilos_logo_nightly_512.png"
+    }
+}

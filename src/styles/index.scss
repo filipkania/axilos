@@ -1,13 +1,13 @@
 @import 'fonts.scss';
 
-div#root {
+div.router {
     --background: #eaeaea;
     --background-contrast: #d8d8d8;
 
     --text-color: #1d1e22;
 }
 
-div#root[dark-theme="true"] {
+div.router[dark-theme="true"] {
     --background: #1d1e22;
     --background-contrast: #3b3d46;
 
@@ -21,7 +21,7 @@ body {
     font-family: "Source Sans Pro";
 }
 
-div#root {
+div.router {
     transition: color 150ms ease-in-out; 
 
     height: 100vh;

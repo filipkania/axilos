@@ -7,19 +7,23 @@ import Buttons from './Buttons';
 
 import WelcomePage from './pages/WelcomePage';
 import LastPage from './pages/LastPage';
+import Appearance from './pages/Appearance';
 
 import '../../styles/elements/FirstLaunch.scss';
 
-const pages = [
-    <></>,
-    <WelcomePage/>,
-    <LastPage/>
-];
-
-const FirstLaunch = ({ options, setOptions }: {
+const FirstLaunch = ({ options, setOptions, darkTheme, setDarkTheme }: {
     options: ElectronProps,
-    setOptions: React.Dispatch<React.SetStateAction<ElectronProps>>
+    setOptions: React.Dispatch<React.SetStateAction<ElectronProps>>,
+    darkTheme: boolean,
+    setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
+    const pages = [
+        <></>,
+        <WelcomePage/>,
+        <Appearance darkTheme={darkTheme} setDarkTheme={setDarkTheme}/>,
+        <LastPage/>
+    ];
+
     const lang = useLanguage();
     const [ display, setDisplay ] = useState<boolean>(true);
     const [ page, setPage ] = useState<number>(0);

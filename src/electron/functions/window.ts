@@ -1,9 +1,11 @@
-import Electron, { BrowserWindow, app } from 'electron';
+import Electron, { BrowserWindow, app, ipcMain, screen } from 'electron';
 import path from 'path';
 import { default as urlLib } from 'url';
 
 import useStorage from './useStorage';
 const storage = useStorage("options");
+
+let windows:Array<ElectronWindow> = [];
 
 class ElectronWindow {
     public appWindow: Electron.BrowserWindow;
@@ -13,6 +15,9 @@ class ElectronWindow {
         firstRun?: boolean
     } = {}) {
         let url;
+        props.firstRun = this.isFirstRun();
+
+        windows.push(this);
 
         this.appWindow = new BrowserWindow({
             width: 800,
@@ -33,8 +38,22 @@ class ElectronWindow {
             slashes: true
         });
 
-        props.firstRun = this.isFirstRun();
-        if (props.firstRun) this.appWindow.setResizable(false);
+        if (props.firstRun) {
+            this.appWindow.setResizable(false);
+
+            ipcMain.once('verification-completed', () => {
+                this.appWindow.setResizable(true);
+                this.registerEventListeners();
+                if (process.env.NODE_ENV !== 'development')
+                    storage.set('verified', true).write();
+                let { width, height } = storage.get('user.options').value();
+                 
+                if (!width || !height) return;
+
+                this.appWindow.setSize(width, height, true);
+                this.appWindow.setPosition(0, 0);
+            });
+        }
 
         url += "?props=" + JSON.stringify(props);
 
@@ -47,10 +66,12 @@ class ElectronWindow {
     }
 
     registerEventListeners = () => {
-
+        // this.appWindow.webContents.add
     }
 
     isFirstRun = () => !storage.get('verified').value()
+
+    getAllWindows = ():Array<ElectronWindow> => windows;
 }
 
 export default ElectronWindow;

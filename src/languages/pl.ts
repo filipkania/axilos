@@ -11,6 +11,16 @@ const pl:Language = {
         NEXT: "Dalej",
         PREV: "Wróć",
         LETS_START: "Rozpocznij"
+    },
+
+    INSTALLATION: {
+        APPEARANCE: {
+            DARK: "Ciemny",
+            LIGHT: "Jasny",
+            SYSTEM: "Automatycznie",
+
+            TITLE: "Wygląd"
+        }
     }
 }
 
