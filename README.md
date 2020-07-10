@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="public/img/axilos_logo_256.png"/>
+    <img src="public/img/axilos_logo_512.png" height="256"/>
 </p>
 
-<span align="center">Axilos</span>
+<div align="center"><h1>Axilos</h1></div>
