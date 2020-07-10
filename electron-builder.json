@@ -13,7 +13,7 @@
         "darkModeSupport": true
     },
     "win": {
-        "icon": "public/img/axilos_logo.ico"
+        "icon": "public/img/axilos_logo_512.ico"
     },
     "linux": {
         "icon": "public/img/axilos_logo_512.png"
