@@ -12,16 +12,15 @@ import Appearance from './pages/Appearance';
 
 import '../../styles/elements/FirstLaunch.scss';
 
-const FirstLaunch = ({ options, setOptions, darkTheme, setDarkTheme }: {
+const FirstLaunch = ({ options, setOptions, setDarkTheme }: {
     options: ElectronProps,
     setOptions: React.Dispatch<React.SetStateAction<ElectronProps>>,
-    darkTheme: boolean,
     setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     const pages = [
         <></>,
         <WelcomePage/>,
-        <Appearance darkTheme={darkTheme} setDarkTheme={setDarkTheme}/>,
+        <Appearance setDarkTheme={setDarkTheme}/>,
         <LastPage/>
     ];
 

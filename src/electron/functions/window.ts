@@ -27,6 +27,7 @@ class ElectronWindow {
             frame: false,
             webPreferences: {
               nodeIntegration: true,
+              webviewTag: true
             },
             show: false,
             icon: path.join(app.getAppPath(), `build/img/axilos_logo${process.env.NODE_ENV === "development" ? "_nightly" : ""}_256.png`)//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
@@ -40,9 +41,12 @@ class ElectronWindow {
 
         if (props.firstRun) {
             this.appWindow.setResizable(false);
+            this.appWindow.setMaximizable(false);
 
             ipcMain.once('verification-completed', () => {
                 this.appWindow.setResizable(true);
+                this.appWindow.setMaximizable(true);
+
                 this.registerEventListeners();
                 if (process.env.NODE_ENV !== 'development')
                     storage.set('verified', true).write();

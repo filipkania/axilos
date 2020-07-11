@@ -17,7 +17,7 @@ const pl:Language = {
         APPEARANCE: {
             DARK: "Ciemny",
             LIGHT: "Jasny",
-            SYSTEM: "Automatycznie",
+            SYSTEM: "Automatyczny",
 
             TITLE: "Wygląd"
         }

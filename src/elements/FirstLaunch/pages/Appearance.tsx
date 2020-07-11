@@ -23,19 +23,28 @@ const Button = ({ img, span, onClick, selected }: {
 )
 
 
-const Appearance = ({ darkTheme, setDarkTheme }:{
+const Appearance = ({ setDarkTheme }:{
     setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>
-    darkTheme: boolean
 }) => {
     const lang = useLanguage();
     const storage = useStorage("options");
     const storageDarkTheme = storage.get('user.options.darkTheme').value();
-    const systemDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const [ systemThemeStatus, setSTS ] = useState<boolean>(false);
     const [ themeStatus, setThemeStatus ] = useState<any>(storageDarkTheme);
 
     useEffect(() => {
         storage.set('user.options.darkTheme', themeStatus).write();
     }, [ themeStatus ]);
+
+    useEffect(() => {
+        const systemDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+        if (systemDarkTheme.media !== "not all") {
+            setSTS(systemDarkTheme.matches);
+            const handleChange:EventListener = (e:any) => setSTS(e.matches);
+            systemDarkTheme.addEventListener('change', handleChange);
+            return () => systemDarkTheme.removeEventListener('change', handleChange);
+        }
+    }, []);
 
     return (
         <div className="Appearance">
@@ -46,16 +55,16 @@ const Appearance = ({ darkTheme, setDarkTheme }:{
                 <Button img={isDev ? LightThemeNightly : LightTheme} span={lang.INSTALLATION.APPEARANCE.LIGHT} selected={themeStatus === "false"} onClick={_ => { setDarkTheme(false); setThemeStatus("false"); }}/>
                 <Button img={isDev ? DarkThemeNightly : DarkTheme} span={lang.INSTALLATION.APPEARANCE.DARK} selected={themeStatus === "true"} onClick={_ => { setDarkTheme(true); setThemeStatus("true"); }}/>
 
-                { systemDarkTheme.media !== "not all" &&
+                { window.matchMedia('(prefers-color-scheme)').media !== "not all" &&
                     <Button 
                         img={
                             isDev ? 
-                                systemDarkTheme.matches ? DarkThemeNightly : LightThemeNightly
-                                : systemDarkTheme.matches ? DarkTheme : LightTheme
+                                systemThemeStatus ? DarkThemeNightly : LightThemeNightly
+                                : systemThemeStatus ? DarkTheme : LightTheme
                         }
                         selected={themeStatus === "system"}
                         span={lang.INSTALLATION.APPEARANCE.SYSTEM} 
-                        onClick={_ => { setDarkTheme(systemDarkTheme.matches); setThemeStatus("system") }}/>
+                        onClick={_ => { setDarkTheme(systemThemeStatus); setThemeStatus("system") }}/>
                 }
 
             </div>
