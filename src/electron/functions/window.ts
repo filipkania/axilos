@@ -27,7 +27,8 @@ class ElectronWindow {
             frame: false,
             webPreferences: {
               nodeIntegration: true,
-              webviewTag: true
+              webviewTag: true,
+              enableRemoteModule: true,
             },
             show: false,
             icon: path.join(app.getAppPath(), `build/img/axilos_logo${process.env.NODE_ENV === "development" ? "_nightly" : ""}_256.png`)//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
@@ -38,6 +39,9 @@ class ElectronWindow {
             protocol: 'file:',
             slashes: true
         });
+
+        if (process.env.NODE_ENV === "development")
+            this.appWindow.webContents.openDevTools({ mode: 'detach' });
 
         if (props.firstRun) {
             this.appWindow.setResizable(false);

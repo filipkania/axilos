@@ -1,5 +1,6 @@
-const { app } = require('electron');
+
 import ElectronWindow from './functions/window';
+import { app } from 'electron';
 
 let windows = [];
 

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 import ReactDOM from 'react-dom';
 
-import DragToolbar from './elements/DragToolbar';
 import FirstLaunch from './elements/FirstLaunch/FirstLaunch';
 import Browser from './elements/Browser/Browser';
 
@@ -28,9 +27,8 @@ const App = () => {
     useEffect(() => {
         const darkSetting:String = storage.get('user.options.darkTheme').value();
 
-        const handleThemeChange:EventListener = (e:any) => {
-            storage.get('user.options.darkTheme').value() === 'system' && setDarkTheme(e.matches)
-        };
+        const handleThemeChange:EventListener = (e:any) =>
+            storage.get('user.options.darkTheme').value() === 'system' && setDarkTheme(e.matches);
 
         if (darkSetting === "system" || darkSetting === null) {
             if (window.matchMedia('(prefers-color-scheme)').media === 'not all') {
@@ -48,7 +46,6 @@ const App = () => {
 
     return (
         <div className="router" dark-theme={darkTheme.toString()}>
-            <DragToolbar/>
             
             {options.firstRun && <FirstLaunch options={options} setDarkTheme={setDarkTheme} setOptions={setOptions}/>}
 
