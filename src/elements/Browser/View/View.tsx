@@ -1,22 +1,18 @@
 import React from 'react';
 import Store from '../../../functions/store/index';
 import { observer } from 'mobx-react';
-import { BrowserView } from 'electron';
 
-class View extends React.Component<any, any> {
-
-    private View:BrowserView=
-
-    constructor(props:any) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <webview id={Store.tabs.selected.id} src={Store.tabs.selected.url}/>
-        );
-    }
-
+const View = () => {
+    return (
+        Store.tabs.list.map((v, i) => (
+            <webview 
+                id={v.id} 
+                ref={v.ref} 
+                key={i} 
+                src={v.url} 
+                style={{ display: Store.tabs.selected.id === v.id ? "flex" : "none"}}/>
+        ))
+    );
 }
 
 export default observer(View);

@@ -4,7 +4,7 @@ import TabStore from './tabs';
 
 class Store {
 
-    public tabs = new TabStore();
+    public tabs = new TabStore(this);
 
     constructor() {
 
