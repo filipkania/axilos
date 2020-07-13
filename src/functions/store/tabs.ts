@@ -1,7 +1,9 @@
-import { ipcRenderer, WebviewTag } from 'electron';
+import { WebviewTag } from 'electron';
+// @ts-ignore
 import { v4 } from 'uuid';
 import { remote } from 'electron';
 import { createRef } from 'react';
+// @ts-ignore
 import { observable, action, observe } from 'mobx';
 
 export default class Tabs {
@@ -26,7 +28,7 @@ export default class Tabs {
         selected?: boolean
     }) {
         const id = this.list.push({
-            url,
+            startingURL: url,
             id: v4(),
             ref: createRef<WebviewTag>()
         }) - 1;
@@ -36,7 +38,7 @@ export default class Tabs {
         if (selected)
             this.selected = this.list[id];
             
-        observe(this.list[id].ref, ({oldValue, newValue}:any) => oldValue === null && newValue === this.list[id].ref && console.log(this.list[id].ref.current)) 
+        observe(this.list[id].ref, ({oldValue, newValue}:any) => oldValue === null && newValue !== null && this.list[id] && console.log(this.list[id].ref.current)) 
         return this.list[id];
     }
 
@@ -46,6 +48,7 @@ export default class Tabs {
 
     @action
     public select(id:string) {
+        if (this.findById(id) === this.selected) return;
         this.selected = this.findById(id);
         console.log(this.selected);
     }

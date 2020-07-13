@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { ElectronProps } from '../../types/index';
+// @ts-ignore
 import { observer } from 'mobx-react';
 
 import View from './View/View';
@@ -12,7 +13,7 @@ const Browser = observer(({ options }: {
 }) => {
 
     useEffect(() => {
-        
+
     }, []);
 
     return (

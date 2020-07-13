@@ -1,5 +1,6 @@
 import React from 'react';
 import Store from '../../../functions/store/index';
+// @ts-ignore
 import { observer } from 'mobx-react';
 
 const View = () => {
@@ -9,7 +10,7 @@ const View = () => {
                 id={v.id} 
                 ref={v.ref} 
                 key={i} 
-                src={v.url} 
+                src={v.startingURL} 
                 style={{ display: Store.tabs.selected.id === v.id ? "flex" : "none"}}/>
         ))
     );

@@ -1,0 +1,47 @@
+.WindowsButtons {
+    font-family: "Segoe UI", sans-serif;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 11;
+
+
+    div {
+        display: flex;
+
+        height: 32px;
+        width: 46px;
+
+        justify-content: center;
+        align-items: center;
+
+        &.close {
+
+            &:hover {
+                background-color: #E81123;
+                color: #FFF;
+            }
+
+            &:active {
+                background-color: #F1707A;
+                color: #171717;
+            }
+        }
+
+        &.maximize, &.minimize {
+            &:hover {
+                background-color: rgba(255,255,255,0.1);
+            }
+
+            &:active {
+                background: rgba(255,255,255,0.2);
+            }
+        }
+    }
+}

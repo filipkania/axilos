@@ -1,15 +1,19 @@
 @import 'fonts.scss';
 
 div.router {
+
     --background: #eaeaea;
     --background-contrast: #d8d8d8;
+    --background-more-contrast: #c2c2c2;
 
     --text-color: #1d1e22;
 }
 
 div.router[dark-theme="true"] {
+
     --background: #1d1e22;
     --background-contrast: #3b3d46;
+    --background-more-contrast: #555865;
 
     --text-color: #eaeaea;
 }
