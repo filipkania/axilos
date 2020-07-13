@@ -4,14 +4,18 @@
       "outDir": "./dist/",
       "noImplicitAny": true,
       "lib": [
-        "es5", "es6", "dom", "dom.iterable"
+        "es5", "es6", "es7", "dom", "dom.iterable"
       ],
       "module": "esnext",
-      "target": "es5",
+      "target": "es6",
       "jsx": "react",
       "esModuleInterop": true,
       "allowJs": true,
       "allowSyntheticDefaultImports": true
     },
+    "typeRoots": [
+      "./node_modules/",
+      "./src/types"
+    ],
     "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

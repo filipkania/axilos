@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ElectronProps } from '../../types/index';
 import { observer } from 'mobx-react';
 
@@ -7,18 +7,13 @@ import Toolbar from './Toolbar/Toolbar';
 
 import '../../styles/elements/Browser.scss';
 
-let tabs = [
-    {
-        address: "https://google.com"
-    },
-    {
-        address: "https://github.com"
-    }
-];
-
 const Browser = observer(({ options }: {
     options: ElectronProps
 }) => {
+
+    useEffect(() => {
+        
+    }, []);
 
     return (
         <div className="Browser">
