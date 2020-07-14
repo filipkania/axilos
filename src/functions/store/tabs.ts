@@ -5,11 +5,12 @@ import { remote } from 'electron';
 import { createRef } from 'react';
 // @ts-ignore
 import { observable, action, observe } from 'mobx';
+import { Tab } from '../../types/tabs';
 
 export default class Tabs {
     
-    @observable public list: any[] = [];
-    @observable public selected: any = {};
+    @observable public list: Tab[] = [];
+    @observable public selected: Tab = null;
 
     private Store:any;
     
@@ -29,16 +30,19 @@ export default class Tabs {
     }) {
         const id = this.list.push({
             startingURL: url,
+            currentURL: url,
+            currentTitle: "",
             id: v4(),
             ref: createRef<WebviewTag>()
         }) - 1;
 
         console.log(id, this.list[id]);
 
+
         if (selected)
             this.selected = this.list[id];
             
-        observe(this.list[id].ref, ({oldValue, newValue}:any) => oldValue === null && newValue !== null && this.list[id] && console.log(this.list[id].ref.current)) 
+        observe(this.list[id].ref, ({oldValue, newValue}:any) => oldValue === null && newValue !== null && this.list[id] && this.registerEventListeners(this.list[id])) 
         return this.list[id];
     }
 
@@ -63,5 +67,17 @@ export default class Tabs {
         }
 
         this.list.splice(this.list.indexOf(this.findById(id)), 1);
+    }
+
+
+    private registerEventListeners(t:Tab) {
+        t.ref.current.addEventListener('will-navigate', (e: Electron.WillNavigateEvent) => {
+            t.currentURL = e.url;
+            t.currentTitle = "";
+        });
+
+        t.ref.current.addEventListener('page-title-updated', (e:Electron.PageTitleUpdatedEvent) => {
+            t.currentTitle = e.title;
+        })
     }
 }

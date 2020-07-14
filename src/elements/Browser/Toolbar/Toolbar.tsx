@@ -26,7 +26,7 @@ const Toolbar = observer(() => {
                             e.stopPropagation();
                             Store.tabs.select(item.id);
                     }}>
-                        {item.id}
+                        { item.currentTitle ? item.currentTitle : item.currentURL}
                         <div onClick={(e:any) => {
                             e.cancelBubbles = false;
                             e.stopPropagation();
