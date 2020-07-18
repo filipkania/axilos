@@ -1,10 +1,19 @@
 
-import ElectronWindow from './functions/window';
+import AppWindow from './functions/window';
 import { app } from 'electron';
+import { platform } from 'os';
 
-let windows = [];
+import useStorage from './functions/useStorage';
 
-app.on('ready', () => {
-    windows.push(new ElectronWindow());
+app.on('ready', async () => { 
+    if (process.env.RESET_VERIFIED) 
+        useStorage('options').set('verified', false).write();
+
+    new AppWindow();
 });
+
+app.on('window-all-closed', () => {
+    if (platform() !== 'darwin') 
+        app.quit();
+}); 
 app.allowRendererProcessReuse = true;

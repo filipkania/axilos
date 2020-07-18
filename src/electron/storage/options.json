@@ -2,8 +2,12 @@
     "verified": false,
     "user": {
         "options": {
-            "height": null,
-            "width": null,
+            "bounds": {
+                "height": null,
+                "width": null,
+                "x": 0,
+                "y": 0
+            },
             "darkTheme": null
         } 
     }
