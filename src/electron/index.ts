@@ -5,8 +5,10 @@ import { platform } from 'os';
 
 import useStorage from './functions/useStorage';
 
+app.name = process.env.NODE_ENV === 'development' ? "Axilos Nightly" : "Axilos";
+
 app.on('ready', async () => { 
-    if (process.env.RESET_VERIFIED) 
+    if (process.env.RUN_FROM_NPM) 
         useStorage('options').set('verified', false).write();
 
     new AppWindow();

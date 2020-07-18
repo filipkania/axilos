@@ -1,9 +1,11 @@
-import Electron, { BrowserWindow, app, ipcMain, screen } from 'electron';
+import Electron, { BrowserWindow, app, ipcMain, screen, Menu } from 'electron';
 import path from 'path';
 import { default as urlLib } from 'url';
 
 import useStorage from './useStorage';
 import Lowdb from 'lowdb';
+
+import firstRunMenu from '../menus/firstRun';
 
 const installationSettings:{
         height: number,
@@ -32,32 +34,32 @@ class AppWindow {
             transparent: true,
             titleBarStyle: 'hiddenInset',
             frame: false,
+            title: isDev ? "Axilos Nightly" : "Axilos",
             webPreferences: {
               nodeIntegration: true,
               webviewTag: true,
               enableRemoteModule: true,
             },
             show: false,
-            icon: path.join(app.getAppPath(), `build/img/axilos_logo${isDev ? "_nightly" : ""}_256.png`)//(process.platform !== "darwin") ? path.resolve(__dirname, "../../public/img/axilos_logo.ico") : undefined,
+            icon: path.join(app.getAppPath(), `build/img/axilos_logo${isDev ? "_nightly" : ""}_256.png`)
         });
         
         url = urlLib.format({
-            pathname: path.join(app.getAppPath(), '/build/installation.html'),
+            pathname: path.join(app.getAppPath(), `/build/${firstRun ? "installation.html" : "index.html"}`),
             protocol: 'file:',
             slashes: true
         });
 
-        if (isDev)
+        if (process.env.RUN_FROM_NPM)
             this.appWindow.webContents.openDevTools({ mode: 'detach' });
 
         if (this.isFirstRun()) {
             this.appWindow.setResizable(false);
             this.appWindow.setMaximizable(false);
 
-            ipcMain.once('verification-completed', () => {
-                this.appWindow.setResizable(true);
-                this.appWindow.setMaximizable(true);
+            Menu.setApplicationMenu(firstRunMenu);
 
+            ipcMain.once('verification-completed', () => {
                 this.registerEventListeners();
 
                 this.storage.set('verified', true).write();
