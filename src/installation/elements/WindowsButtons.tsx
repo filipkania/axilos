@@ -1,7 +1,7 @@
 import React from 'react';
 import { remote } from 'electron';
 
-import '../styles/elements/WindowsButtons.scss';
+import '~/src/styles/installation/elements/WindowsButtons.scss';
 
 const WindowsButtons = () => {
     const currentWindow = remote.getCurrentWindow();

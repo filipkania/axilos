@@ -4,25 +4,13 @@ import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import FirstLaunch from './elements/FirstLaunch/FirstLaunch';
-import Browser from './elements/Browser/Browser';
 
-
-import './styles/index.scss'; 
-import { ElectronProps } from './types/index';
-import useStorage from './functions/useStorage';
+import '../styles/index.scss'; 
+import useStorage from '../functions/useStorage';
 
 const App = () => {
     const storage = useStorage('options');
-    const [ options, setOptions ] = useState<ElectronProps>({
-        firstRun: false,
-        incognito: false
-    });
     const [ darkTheme, setDarkTheme ] = useState<boolean>(false);
-    
-    useEffect(() => {
-        let url = new URLSearchParams(window.location.search);
-        setOptions(JSON.parse(url.get('props')));
-    }, []);
 
     useEffect(() => {
         const darkSetting:String = storage.get('user.options.darkTheme').value();
@@ -46,10 +34,7 @@ const App = () => {
 
     return (
         <div className="router" dark-theme={darkTheme.toString()}>
-            
-            {options.firstRun && <FirstLaunch options={options} setDarkTheme={setDarkTheme} setOptions={setOptions}/>}
-
-            <Browser options={options}/>
+            <FirstLaunch setDarkTheme={setDarkTheme}/>
         </div>
     );
 }

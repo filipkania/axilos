@@ -12,6 +12,9 @@ module.exports = [
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             mainFields: ['main', 'module', 'browser'],
+            alias: {
+                "~": __dirname
+            }
         },
         watchOptions: {
             ignored: [
@@ -19,7 +22,7 @@ module.exports = [
             ]
         },
         entry: {
-            main: './src/App.tsx',
+            installation: './src/installation/App.tsx',
             electron: './src/electron/index.ts'
         },
         target: 'electron-main',

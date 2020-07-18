@@ -17,5 +17,8 @@
       "./node_modules/",
       "./src/types"
     ],
+    "paths": {
+      "~/*": [ "./*" ]
+    },
     "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

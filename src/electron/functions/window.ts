@@ -35,7 +35,7 @@ class ElectronWindow {
         });
         
         url = urlLib.format({
-            pathname: path.join(app.getAppPath(), '/build/index.html'),
+            pathname: path.join(app.getAppPath(), '/build/installation.html'),
             protocol: 'file:',
             slashes: true
         });

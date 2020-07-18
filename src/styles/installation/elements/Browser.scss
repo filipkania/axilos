@@ -20,8 +20,8 @@
 
         .tabs {
             display: flex;
-            overflow-x: scroll;
             flex-direction: row;
+            overflow-x: scroll;
 
             -webkit-app-region: none;
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import useLanguage from '../../../functions/useLanguage';
+import useLanguage from '../../../../functions/useLanguage';
 
-import LightTheme from '../../../../public/img/Axilos_appearance_light-theme.png';
-import DarkTheme from '../../../../public/img/Axilos_appearance_dark-theme.png';
-import LightThemeNightly from '../../../../public/img/Axilos_nightly_appearance_light-theme.png';
-import DarkThemeNightly from '../../../../public/img/Axilos_nightly_appearance_dark-theme.png';
+import LightTheme from '~/public/img/Axilos_appearance_light-theme.png';
+import DarkTheme from '~/public/img/Axilos_appearance_dark-theme.png';
+import LightThemeNightly from '~/public/img/Axilos_nightly_appearance_light-theme.png';
+import DarkThemeNightly from '~/public/img/Axilos_nightly_appearance_dark-theme.png';
 
-import useStorage from '../../../functions/useStorage';
+import useStorage from '../../../../functions/useStorage';
 
 const isDev = process.env.NODE_ENV === 'development';
 
