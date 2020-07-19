@@ -79,8 +79,9 @@ class AppWindow {
                 }).write();
 
                 this.destroy();
-
-                new AppWindow();
+                let newWindow: AppWindow = new AppWindow();
+                if (this.onInsEnd)
+                    this.onInsEnd(newWindow);
             });
 
             this.window.loadURL(format({
@@ -118,6 +119,9 @@ class AppWindow {
     public findViewById = (id: string) => this.views.filter(v => v.id === id)[0]
 
     private isFirstRun = () => !this.storage.get('verified').value()
+
+    public onInstallationEnd = (cb: Function) => this.onInsEnd = cb; 
+    private onInsEnd: Function;
 }
 
 export default AppWindow;

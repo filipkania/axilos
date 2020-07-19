@@ -13,11 +13,13 @@ app.name = name;
 if (!app.requestSingleInstanceLock())
     app.quit();
 else {
-    app.on('ready', async () => { 
+    app.on('ready', () => {
         if (process.env.RUN_FROM_NPM) 
             useStorage('options').set('verified', false).write();
 
         window = new AppWindow();
+
+        window.onInstallationEnd((newWindow: AppWindow) => window = newWindow)
     });
 
     app.on('second-instance', () => {
@@ -31,7 +33,7 @@ else {
 
     app.on('before-quit', () => {
         const storage = useStorage('options');
-        const { width, height, x, y } = window.window.getBounds();
+        const { width, height, x, y } = window.window.getBounds(); 
 
         storage.set('user.options.bounds', {
             width,
