@@ -31,6 +31,8 @@ export default class View {
 
         this.view.webContents.loadURL(url);
 
+        if (this.AppWindow)
+            this.AppWindow.views.push(this);
     }
 
     public updateBounds() {

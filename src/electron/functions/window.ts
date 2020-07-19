@@ -6,7 +6,7 @@ import useStorage from './useStorage';
 import Lowdb from 'lowdb';
 
 import firstRunMenu from '../menus/firstRun';
-import View from './View';
+import View from './view';
 
 const installationSettings:{
         height: number,
@@ -18,7 +18,7 @@ const installationSettings:{
 class AppWindow {
     public window: BrowserWindow;
     private storage: Lowdb.LowdbSync<any>;
-    private views: View[] = [];
+    public views: View[] = [];
 
     constructor() {
         this.storage = useStorage('options');
@@ -89,7 +89,7 @@ class AppWindow {
                 slashes: true
             }));
 
-            this.views.push(new View(this, "https://google.com"));
+            new View(this, "https://google.com");
 
         }
 
