@@ -1,11 +1,11 @@
 import { Language } from '../types/language';
-import { getLogo, getName } from '../functions/getNameAndLogo';
+import { logo, name } from '../constants/info';
 
 const en:Language = {
     TEST_LANGUAGE: "hi!",
     
-    LOGO: getLogo(),
-    NAME: getName(),
+    LOGO: logo,
+    NAME: name,
 
     BUTTONS: {
         NEXT: "Next",

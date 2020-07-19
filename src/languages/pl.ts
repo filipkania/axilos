@@ -1,11 +1,11 @@
 import { Language } from '../types/language';
-import { getLogo, getName } from '../functions/getNameAndLogo';
+import { logo, name } from '../constants/info';
 
 const pl:Language = {
     TEST_LANGUAGE: "polska kurka",
     
-    LOGO: getLogo(),
-    NAME: getName(),
+    LOGO: logo,
+    NAME: name,
 
     BUTTONS: {
         NEXT: "Dalej",

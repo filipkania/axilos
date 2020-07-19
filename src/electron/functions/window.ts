@@ -1,11 +1,12 @@
-import Electron, { BrowserWindow, app, ipcMain, screen, Menu } from 'electron';
-import path from 'path';
-import { default as urlLib } from 'url';
+import { BrowserWindow, app, ipcMain, screen, Menu } from 'electron';
+import { join } from 'path';
+import { format } from 'url';
 
 import useStorage from './useStorage';
 import Lowdb from 'lowdb';
 
 import firstRunMenu from '../menus/firstRun';
+import View from './View';
 
 const installationSettings:{
         height: number,
@@ -15,18 +16,18 @@ const installationSettings:{
         width: 800
     };
 class AppWindow {
-    public appWindow: Electron.BrowserWindow;
+    public window: BrowserWindow;
     private storage: Lowdb.LowdbSync<any>;
+    private views: View[] = [];
 
     constructor() {
         this.storage = useStorage('options');
 
-        let url:string,
-            isDev:boolean = process.env.NODE_ENV === "development", 
+        let isDev:boolean = process.env.NODE_ENV === "development", 
             { height, width, x, y } = this.storage.get('user.options.bounds').value(),
             firstRun:boolean = this.isFirstRun();
 
-        this.appWindow = new BrowserWindow({
+        this.window = new BrowserWindow({
             height: firstRun ? installationSettings.height : height,
             width: firstRun ? installationSettings.width : width,
             x: firstRun ? undefined : x,
@@ -36,26 +37,24 @@ class AppWindow {
             frame: false,
             title: isDev ? "Axilos Nightly" : "Axilos",
             webPreferences: {
-              nodeIntegration: true,
-              webviewTag: true,
-              enableRemoteModule: true,
+                plugins: true,
+                nodeIntegration: true,
+                contextIsolation: false,
+                webviewTag: true,
+                experimentalFeatures: true,
+                webSecurity: false,
+                enableRemoteModule: true
             },
-            show: false,
-            icon: path.join(app.getAppPath(), `build/img/axilos_logo${isDev ? "_nightly" : ""}_256.png`)
-        });
-        
-        url = urlLib.format({
-            pathname: path.join(app.getAppPath(), `/build/${firstRun ? "installation.html" : "index.html"}`),
-            protocol: 'file:',
-            slashes: true
+            show: true,
+            icon: join(app.getAppPath(), `build/img/axilos_logo${isDev ? "_nightly" : ""}_256.png`)
         });
 
-        if (process.env.RUN_FROM_NPM)
-            this.appWindow.webContents.openDevTools({ mode: 'detach' });
+        // if (process.env.RUN_FROM_NPM)
+            this.window.webContents.openDevTools({ mode: 'detach' });
 
         if (this.isFirstRun()) {
-            this.appWindow.setResizable(false);
-            this.appWindow.setMaximizable(false);
+            this.window.setResizable(false);
+            this.window.setMaximizable(false);
 
             Menu.setApplicationMenu(firstRunMenu);
 
@@ -76,18 +75,33 @@ class AppWindow {
 
                 new AppWindow();
             });
+
+            this.window.loadURL(format({
+                pathname: join(app.getAppPath(), `/build/installation.html`),
+                protocol: 'file:',
+                slashes: true
+            }));
+        } else {
+
+            this.window.loadURL(format({
+                pathname: join(app.getAppPath(), `/build/overlay.html`),
+                protocol: 'file:',
+                slashes: true
+            }));
+
+            this.views.push(new View(this, "https://google.com"));
+
         }
 
-        this.appWindow.once('ready-to-show', this.appWindow.show);
-        this.appWindow.loadURL(url);
+        this.window.once('ready-to-show', this.window.show);
           
-        this.appWindow.on('closed', () => {
-            this.appWindow = null;
+        this.window.on('closed', () => {
+            this.window = null;
         });
     }
 
     public destroy() {
-        this.appWindow.close();
+        this.window.close();
     }
 
     private registerEventListeners = () => {

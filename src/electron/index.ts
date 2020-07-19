@@ -2,10 +2,11 @@
 import AppWindow from './functions/window';
 import { app } from 'electron';
 import { platform } from 'os';
+import { name } from '../constants/info';
 
 import useStorage from './functions/useStorage';
 
-app.name = process.env.NODE_ENV === 'development' ? "Axilos Nightly" : "Axilos";
+app.name = name;
 
 app.on('ready', async () => { 
     if (process.env.RUN_FROM_NPM) 

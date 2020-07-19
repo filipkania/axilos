@@ -28,9 +28,8 @@ const Appearance = ({ setDarkTheme }:{
 }) => {
     const lang = useLanguage();
     const storage = useStorage("options");
-    const storageDarkTheme = storage.get('user.options.darkTheme').value();
     const [ systemThemeStatus, setSTS ] = useState<boolean>(false);
-    const [ themeStatus, setThemeStatus ] = useState<any>(storageDarkTheme);
+    const [ themeStatus, setThemeStatus ] = useState<string | null>(storage.get('user.options.darkTheme').value());
 
     useEffect(() => {
         storage.set('user.options.darkTheme', themeStatus).write();
