@@ -6,17 +6,44 @@ import { name } from '../constants/info';
 
 import useStorage from './functions/useStorage';
 
+let window: AppWindow;
+
 app.name = name;
 
-app.on('ready', async () => { 
-    if (process.env.RUN_FROM_NPM) 
-        useStorage('options').set('verified', false).write();
+if (!app.requestSingleInstanceLock())
+    app.quit();
+else {
+    app.on('ready', async () => { 
+        if (process.env.RUN_FROM_NPM) 
+            useStorage('options').set('verified', false).write();
 
-    new AppWindow();
-});
+        window = new AppWindow();
+    });
 
-app.on('window-all-closed', () => {
-    if (platform() !== 'darwin') 
-        app.quit();
-}); 
-app.allowRendererProcessReuse = true;
+    app.on('second-instance', () => {
+        if (!window)
+            return;
+
+        if (window.window.isMinimized())
+            window.window.restore()
+        window.window.focus();
+    });
+
+    app.on('before-quit', () => {
+        const storage = useStorage('options');
+        const { width, height, x, y } = window.window.getBounds();
+
+        storage.set('user.options.bounds', {
+            width,
+            height,
+            x,
+            y
+        }).write();
+    });
+
+    app.on('window-all-closed', () => {
+        if (platform() !== 'darwin') 
+            app.quit();
+    }); 
+    app.allowRendererProcessReuse = true;
+}
