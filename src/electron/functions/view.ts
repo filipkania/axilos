@@ -1,7 +1,7 @@
 import { BrowserView } from "electron"
 import AppWindow from "./window";
 import NAVIGATION from '../../constants/navigation';
-
+import { EventListeners } from '../../types/view';
 export default class View {
     public view: BrowserView;
     private AppWindow: AppWindow;
@@ -19,8 +19,15 @@ export default class View {
         this.AppWindow = appWindow;
         this.AppWindow.window.setBrowserView(this.view);
 
+        this.view.webContents.setUserAgent(
+            this.view.webContents.userAgent
+                .replace(/ Electron\\?.([^\s]+)/g, '')
+        )
+
         this.updateBounds();
         this.view.setAutoResize({ width: true, height: true, horizontal: false, vertical: false });
+
+        Object.keys(this.eventListeners).forEach((e:any) => this.view.webContents.addListener(e, this.eventListeners[e]));
 
         this.view.webContents.loadURL(url);
 
@@ -35,5 +42,16 @@ export default class View {
             height: height - NAVIGATION.HEIGHT,
             width: width
         });
+    }
+
+    private get eventListeners(): EventListeners {
+        return {
+            "did-navigate": () => {
+                
+            },
+            "did-finish-load": () => {
+
+            }
+        };
     }
 }

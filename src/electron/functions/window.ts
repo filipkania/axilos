@@ -96,7 +96,7 @@ class AppWindow {
         this.window.once('ready-to-show', this.window.show);
           
         this.window.on('closed', () => {
-            this.window = null;
+            this.window = null; 
         });
     }
 
