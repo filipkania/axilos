@@ -4,6 +4,8 @@ import { format } from 'url';
 
 import useStorage from './useStorage';
 import Lowdb from 'lowdb';
+// @ts-ignore
+import { observable } from 'mobx';
 
 import firstRunMenu from '../menus/firstRun';
 import View from './view';
@@ -18,7 +20,12 @@ const installationSettings:{
 class AppWindow {
     public window: BrowserWindow;
     private storage: Lowdb.LowdbSync<any>;
+    
+    @observable
     public views: View[] = [];
+    
+    @observable
+    public selected: string;
 
     constructor() {
         this.storage = useStorage('options');
@@ -45,7 +52,7 @@ class AppWindow {
                 webSecurity: false,
                 enableRemoteModule: true
             },
-            show: true,
+            show: false,
             icon: join(app.getAppPath(), `build/img/axilos_logo${isDev ? "_nightly" : ""}_256.png`)
         });
 
@@ -89,8 +96,8 @@ class AppWindow {
                 slashes: true
             }));
 
-            new View(this, "https://google.com");
-
+            new View(this, "https://google.com", true);
+            
         }
 
         this.window.once('ready-to-show', this.window.show);
@@ -107,6 +114,8 @@ class AppWindow {
     private registerEventListeners = () => {
         // this.appWindow.webContents.add
     }
+
+    public findViewById = (id: string) => this.views.filter(v => v.id === id)[0]
 
     private isFirstRun = () => !this.storage.get('verified').value()
 }

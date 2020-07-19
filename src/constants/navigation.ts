@@ -1,4 +1,4 @@
 export default {
-    HEIGHT: 84,
+    HEIGHT: 80,
     HEIGHT_WITH_BOOKMARKS: undefined
 };
