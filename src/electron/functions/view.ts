@@ -78,6 +78,10 @@ export default class View {
     }
 
     public destroy() { 
+        if (this.AppWindow.selected === this.id)
+            this.AppWindow.window.setBrowserView(null);
+
+        this.view.destroy();
         this.AppWindow.views.splice(this.AppWindow.views.indexOf(this), 1);
     }
 }
