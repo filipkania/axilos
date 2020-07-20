@@ -76,4 +76,8 @@ export default class View {
         this.AppWindow.window.setBrowserView(this.view);
         this.updateBounds();
     }
+
+    public destroy() { 
+        this.AppWindow.views.splice(this.AppWindow.views.indexOf(this), 1);
+    }
 }

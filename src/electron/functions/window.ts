@@ -4,8 +4,6 @@ import { format } from 'url';
 
 import useStorage from './useStorage';
 import Lowdb from 'lowdb';
-// @ts-ignore
-import { observable } from 'mobx';
 
 import firstRunMenu from '../menus/firstRun';
 import View from './view';
@@ -21,11 +19,8 @@ const installationSettings:{
 class AppWindow {
     public window: BrowserWindow;
     private storage: Lowdb.LowdbSync<any>;
-    
-    @observable
+
     public views: View[] = [];
-    
-    @observable
     public selected: string;
 
     constructor() {
