@@ -2,6 +2,7 @@
     "verified": false,
     "user": {
         "options": {
+            "hardwareAcceleration": true,
             "bounds": {
                 "height": null,
                 "width": null,

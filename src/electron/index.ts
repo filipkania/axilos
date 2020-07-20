@@ -1,22 +1,25 @@
 
 import AppWindow from './functions/window';
 import { app } from 'electron';
-import { platform } from 'os';
 import { name } from '../constants/info';
 
 import useStorage from './functions/useStorage';
 
 let window: AppWindow;
+const options = useStorage('options');
 
-app.name = name;
+app.setName(name);
 
 if (!app.requestSingleInstanceLock())
     app.quit();
 else {
+
+    if (!options.get('user.options.hardwareAcceleration').value())
+        app.disableHardwareAcceleration();
+
     app.on('ready', () => {
         if (process.env.RUN_FROM_NPM) 
-            useStorage('options').set('verified', false).write();
-
+            options.set('verified', false).write();
         window = new AppWindow();
 
         window.onInstallationEnd((newWindow: AppWindow) => window = newWindow)
@@ -43,9 +46,6 @@ else {
         }).write();
     });
 
-    app.on('window-all-closed', () => {
-        if (platform() !== 'darwin') 
-            app.quit();
-    }); 
+    app.on('window-all-closed', () => app.quit()); 
     app.allowRendererProcessReuse = true;
 }

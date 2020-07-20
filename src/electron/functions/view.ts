@@ -3,22 +3,22 @@ import AppWindow from "./window";
 // @ts-ignore
 import { v4 } from 'uuid';
 import NAVIGATION from '../../constants/navigation';
-import { EventListeners } from '../../types/view';
+import { EventListeners, ViewProps } from '../../types/view';
 export default class View {
     public view: BrowserView;
     public id: string;
     private AppWindow: AppWindow;
     
-    constructor(appWindow: AppWindow, url: string = "axilos://start", selected: boolean = false, ) {
+    constructor({ appWindow, id, url, selected, incognito}: ViewProps ) {
         
-        this.id = v4();
+        this.id = id || v4();
 
         this.view = new BrowserView({
             webPreferences: {
                 plugins: true,
                 sandbox: true,
                 contextIsolation: true,
-                partition: 'persist:view',
+                partition: incognito ? 'axilos:incognito' : 'persist:view',
                 scrollBounce: true,
                 nodeIntegration: false,
             }
@@ -75,6 +75,5 @@ export default class View {
         this.AppWindow.selected = this.id;
         this.AppWindow.window.setBrowserView(this.view);
         this.updateBounds();
-
     }
 }

@@ -9,6 +9,7 @@ import { observable } from 'mobx';
 
 import firstRunMenu from '../menus/firstRun';
 import View from './view';
+import startRecieving from '../messaging/index';
 
 const installationSettings:{
         height: number,
@@ -66,7 +67,6 @@ class AppWindow {
             Menu.setApplicationMenu(firstRunMenu);
 
             ipcMain.once('verification-completed', () => {
-                this.registerEventListeners();
 
                 this.storage.set('verified', true).write();
                 let { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -97,8 +97,7 @@ class AppWindow {
                 slashes: true
             }));
 
-            new View(this, "https://google.com", true);
-            
+            this.registerEventListeners();
         }
 
         this.window.once('ready-to-show', this.window.show);
@@ -113,7 +112,9 @@ class AppWindow {
     }
 
     private registerEventListeners = () => {
-        // this.appWindow.webContents.add
+        startRecieving(this);
+
+        this.window.on('resize', () => this.findViewById(this.selected).updateBounds());
     }
 
     public findViewById = (id: string) => this.views.filter(v => v.id === id)[0]
