@@ -9,12 +9,13 @@ export default class View {
     public id: string;
     private AppWindow: AppWindow;
     
-    constructor(appWindow: AppWindow, url: string = "axilos://start", selected: boolean = false) {
+    constructor(appWindow: AppWindow, url: string = "axilos://start", selected: boolean = false, ) {
         
         this.id = v4();
 
         this.view = new BrowserView({
             webPreferences: {
+                plugins: true,
                 sandbox: true,
                 contextIsolation: true,
                 partition: 'persist:view',
@@ -29,7 +30,6 @@ export default class View {
                 .replace(/ Electron\\?.([^\s]+)/g, '')
         )
 
-        this.updateBounds();
         this.view.setAutoResize({ 
             width: true, 
             height: true, 
@@ -73,9 +73,8 @@ export default class View {
 
     public makeSelected() {
         this.AppWindow.selected = this.id;
-
         this.AppWindow.window.setBrowserView(this.view);
-
         this.updateBounds();
+
     }
 }
