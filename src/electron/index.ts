@@ -1,9 +1,10 @@
 
 import AppWindow from './functions/window';
-import { app } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { name } from '../constants/info';
 
 import useStorage from './functions/useStorage';
+import handleCrash from './functions/handleCrash';
 
 let window: AppWindow;
 const options = useStorage('options');
@@ -24,6 +25,8 @@ else {
 
         window.onInstallationEnd((newWindow: AppWindow) => window = newWindow)
     });
+
+    ipcMain.on('overlay-crashed', handleCrash);
 
     app.on('second-instance', () => {
         if (!window)

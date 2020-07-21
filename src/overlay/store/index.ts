@@ -21,6 +21,9 @@ class Store {
     
     @action
     public selectTab = (id: string) => {
+        if (this.selected.id === id)
+            return;
+        
         ipcRenderer.send('select-tab', id);
         this.selected = this.getTabById(id);
     }
@@ -39,8 +42,10 @@ class Store {
             remote.app.quit()
         else {
 
-            this.tabs.splice(this.tabs.indexOf(tab), 1); 
-            this.selectTab(this.tabs[0].id);
+            const indexOfTab = this.tabs.indexOf(tab);
+
+            this.tabs.splice(indexOfTab, 1); 
+            this.selectTab(this.tabs[indexOfTab - 1].id);
         }
     }
 
