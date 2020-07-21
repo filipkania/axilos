@@ -73,8 +73,8 @@ class AppWindow {
                     height
                 }).write();
 
-                this.destroy();
                 let newWindow: AppWindow = new AppWindow();
+                this.destroy();
                 if (this.onInsEnd)
                     this.onInsEnd(newWindow);
             });

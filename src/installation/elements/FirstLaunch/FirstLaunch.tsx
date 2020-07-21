@@ -14,10 +14,12 @@ import '~/src/styles/installation/elements/FirstLaunch.scss';
 const FirstLaunch = ({ setDarkTheme }: {
     setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
+    const [ disabled, setDisabled ] = useState<boolean>(false); 
+
     const pages = [
         <></>,
         <WelcomePage/>,
-        <Appearance setDarkTheme={setDarkTheme}/>,
+        <Appearance setDarkTheme={setDarkTheme} setDisabled={setDisabled}/>,
         <LastPage/>
     ];
 
@@ -45,7 +47,7 @@ const FirstLaunch = ({ setDarkTheme }: {
                 {pages[page]}
             </animated.div>
 
-            <Buttons page={page} setPage={setPage} allPages={pages.length}/>
+            <Buttons page={page} setPage={setPage} disabled={disabled} allPages={pages.length}/>
         </animated.div>
     )
 }

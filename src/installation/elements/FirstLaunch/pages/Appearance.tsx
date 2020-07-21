@@ -23,8 +23,9 @@ const Button = ({ img, span, onClick, selected }: {
 )
 
 
-const Appearance = ({ setDarkTheme }:{
-    setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>
+const Appearance = ({ setDarkTheme, setDisabled }:{
+    setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>,
+    setDisabled: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     const lang = useLanguage();
     const storage = useStorage("options");
@@ -32,7 +33,11 @@ const Appearance = ({ setDarkTheme }:{
     const [ themeStatus, setThemeStatus ] = useState<string | null>(storage.get('user.options.darkTheme').value());
 
     useEffect(() => {
+        setDisabled(themeStatus === null);
+
         storage.set('user.options.darkTheme', themeStatus).write();
+
+        return () => setDisabled(false)
     }, [ themeStatus ]);
 
     useEffect(() => {

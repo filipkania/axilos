@@ -9,7 +9,7 @@ import useLanguage from '../../../functions/useLanguage';
 
 import { ipcRenderer } from 'electron';
 
-const Buttons = ({ page, setPage, allPages }: ButtonsProps) => {
+const Buttons = ({ page, setPage, allPages, disabled }: ButtonsProps) => {
     const lang = useLanguage();
     const { transform, opacity } = useSpring({
         transform: (page === 0) ? 'translateX(-50px)' : 'translateX(0px)',
@@ -23,7 +23,7 @@ const Buttons = ({ page, setPage, allPages }: ButtonsProps) => {
                 <span>{lang.BUTTONS.PREV}</span>
             </animated.div>
 
-            <div className="Buttons__b next" onClick={() => {
+            <div className={`Buttons__b next${disabled ? " disabled" : ""}`} onClick={() => {
                 if (page === allPages - 1)
                     return ipcRenderer.send('verification-completed', '');
 
