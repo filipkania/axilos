@@ -1,4 +1,3 @@
-
 import AppWindow from './functions/window';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { name } from '../constants/info';
@@ -26,20 +25,26 @@ else {
         window.onInstallationEnd((newWindow: AppWindow) => window = newWindow)
     });
 
-    ipcMain.on('overlay-crashed', handleCrash);
+    if (!process.env.RUN_FROM_NPM) 
+        ipcMain.on('overlay-crashed', handleCrash);
 
     app.on('second-instance', () => {
-        if (!window)
+        const windows = BrowserWindow.getAllWindows();
+        if (!windows[0] && !windows[0].isDestroyed())
             return;
 
-        if (window.window.isMinimized())
-            window.window.restore()
-        window.window.focus();
+        if (windows[0].isMinimized())
+            windows[0].restore()
+        windows[0].focus();
     });
 
     app.on('before-quit', () => {
+        const windows = BrowserWindow.getAllWindows();
+        if (!windows[0] && !windows[0].isDestroyed())
+            return;
+
         const storage = useStorage('options');
-        const { width, height, x, y } = window.window.getBounds(); 
+        const { width, height, x, y } = windows[0].getBounds(); 
 
         storage.set('user.options.bounds', {
             width,

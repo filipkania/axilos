@@ -23,6 +23,7 @@ module.exports = [
         },
         entry: {
             installation: './src/installation/App.tsx',
+            error: './src/electron/errorwindow/App.tsx',
             overlay: './src/overlay/App.tsx',
             electron: './src/electron/index.ts'
         },

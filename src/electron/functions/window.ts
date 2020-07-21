@@ -4,6 +4,7 @@ import { format } from 'url';
 
 import useStorage from './useStorage';
 import Lowdb from 'lowdb';
+import { isDev } from '../../constants/info';
 
 import firstRunMenu from '../menus/firstRun';
 import View from './view';
@@ -26,8 +27,7 @@ class AppWindow {
     constructor() {
         this.storage = useStorage('options');
 
-        let isDev:boolean = process.env.NODE_ENV === "development", 
-            { height, width, x, y } = this.storage.get('user.options.bounds').value(),
+        let { height, width, x, y } = this.storage.get('user.options.bounds').value(),
             firstRun:boolean = this.isFirstRun();
 
         this.window = new BrowserWindow({
@@ -52,7 +52,7 @@ class AppWindow {
             icon: join(app.getAppPath(), `build/img/axilos_logo${isDev ? "_nightly" : ""}_256.png`)
         });
 
-        // if (process.env.RUN_FROM_NPM)
+        if (process.env.RUN_FROM_NPM)
             this.window.webContents.openDevTools({ mode: 'detach' });
 
         if (this.isFirstRun()) {

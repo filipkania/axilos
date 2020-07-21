@@ -6,6 +6,9 @@ div.router {
     --background-contrast: #d8d8d8;
     --background-more-contrast: #c2c2c2;
 
+    --blue: #0a84ff;
+    --blue-darken: #0076ee;
+
     --text-color: #1d1e22;
 }
 
@@ -36,6 +39,7 @@ div.router {
     left: 0;
     background-color: var(--background);
     color: var(--text-color);
+    user-select: none;
 
     overflow: hidden;
 }

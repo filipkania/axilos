@@ -5,7 +5,7 @@
   "main": "build/js/electron.bundle.js",
   "scripts": {
     "dev:start": "NODE_ENV=development DEV_START=1 webpack-dev-server --config webpack.config.dev.js --mode development",
-    "dev:electron_start": "NODE_ENV=development electron .",
+    "dev:electron_start": "NODE_ENV=development RUN_FROM_NPM=1 electron .",
     "dev:build": "NODE_ENV=development webpack --config webpack.config.dev.js",
     "dev:pack": "npm run dev:build && electron-builder -w --config electron-builder-dev.json",
     "prod:build": "webpack --config webpack.config.prod.js",
@@ -46,6 +46,7 @@
     "lowdb": "^1.0.0",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
+    "os": "^0.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-spring": "^8.0.27",

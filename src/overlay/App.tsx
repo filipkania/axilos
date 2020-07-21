@@ -11,7 +11,7 @@ import Store from './store/index';
 import { observer } from 'mobx-react';
 import { ipcRenderer } from 'electron';
 import navigation from '../constants/navigation';
-import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './elements/ErrorBoundary';
 
 const App = observer(() => {
     const [ darkTheme ] = useTheme();

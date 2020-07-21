@@ -21,6 +21,13 @@ const pl:Language = {
 
             TITLE: "Wygląd"
         }
+    },
+
+    ERROR: { 
+        CLOSE: "Zamknij",
+        ERROR_OCCURED: "Wystąpił nieoczekiwany błąd", 
+        REPORT_ERROR: "Axilos jest open-source'owym projektem, dlatego przydało by się abyś zgłosił ten błąd pod tym adresem:",
+        ISSUES_URL: "https://github.com/filipkania/axilos/issues"
     }
 }
 

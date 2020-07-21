@@ -3,6 +3,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 import FirstLaunch from './elements/FirstLaunch/FirstLaunch';
+import ErrorBoundary from '../overlay/elements/ErrorBoundary';
 
 import '../styles/index.scss'; 
 import useTheme from '../functions/useTheme';
@@ -17,4 +18,4 @@ const App = () => {
     );
 }
 
-ReactDOM.render(<App/>, document.getElementById('root')); 
+ReactDOM.render(<ErrorBoundary><App/></ErrorBoundary>, document.getElementById('root')); 

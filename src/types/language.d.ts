@@ -20,4 +20,11 @@ export interface Language {
             TITLE: string;
         }
     }
+
+    ERROR: {
+        CLOSE: string;
+        ERROR_OCCURED: string;
+        REPORT_ERROR: string;
+        ISSUES_URL: string;
+    }
 }

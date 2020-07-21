@@ -21,6 +21,13 @@ const en:Language = {
 
             TITLE: "Appearance"
         }
+    },
+
+    ERROR: { 
+        CLOSE: "Close",
+        ERROR_OCCURED: "Unexpected error occured", 
+        REPORT_ERROR: "Axilos is a open-source browser, so you can report this bug under this link:",
+        ISSUES_URL: "https://github.com/filipkania/axilos/issues"
     }
 }
 
