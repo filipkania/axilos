@@ -12,11 +12,14 @@ import { observer } from 'mobx-react';
 import { ipcRenderer } from 'electron';
 import navigation from '../constants/navigation';
 import ErrorBoundary from './elements/ErrorBoundary';
+import createWindow from './functions/createWindow';
 
 const App = observer(() => {
     const [ darkTheme ] = useTheme();
 
     useEffect(() => {
+        Store.windowID = window.location.search.replace("?id=", "");
+
         MessagingAgent();
         Store.createNewTab();
     }, []);
@@ -36,7 +39,7 @@ const App = observer(() => {
                     url: 'https://github.com'
                 })}>+</button>
 
-                <button onClick={() => ipcRenderer.send('create-window')}>_</button>
+                <button onClick={createWindow}>_</button>
             </div>
         </div>
     );

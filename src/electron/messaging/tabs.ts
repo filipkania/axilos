@@ -4,7 +4,7 @@ import View from "../functions/view";
 import { ViewProps } from "../../types/view";
 
 export default (appWindow: AppWindow) => {
-    ipcMain.on('create-tab', (_, data: ViewProps) => {
+    ipcMain.on(`${appWindow.id}-create-tab`, (_, data: ViewProps) => {
         const { id, url, incognito, selected } = data;
         new View({
             appWindow,
@@ -15,6 +15,6 @@ export default (appWindow: AppWindow) => {
         });
     });
 
-    ipcMain.on('destroy-tab', (_, id) => appWindow.findViewById(id).destroy())
-    ipcMain.on('select-tab', (_, id) => appWindow.findViewById(id).makeSelected())
+    ipcMain.on(`${appWindow.id}-destroy-tab`, (_, id) => appWindow.findViewById(id).destroy())
+    ipcMain.on(`${appWindow.id}-select-tab`, (_, id) => appWindow.findViewById(id).makeSelected())
 };

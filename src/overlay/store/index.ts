@@ -5,7 +5,6 @@ import { createTabProps } from "../../types/overlay";
 import { ipcRenderer } from "electron";
 import { remote } from 'electron';
 
-
 class Store {
 
     @observable
@@ -13,24 +12,26 @@ class Store {
 
     public lastClosed: Tab[] = [];
 
+    public windowID: string;
+
     @observable
     public selected: Tab;
 
     public getTabById = (id: string) => this.tabs.filter((a) => a.id === id)[0];
-    public createNewTab = (data?: createTabProps) => new Tab(data);
+    public createNewTab = (data: createTabProps = {}) => new Tab(data);
     
     @action
     public selectTab = (id: string) => {
         if (this.selected.id === id)
             return;
         
-        ipcRenderer.send('select-tab', id);
+        ipcRenderer.send(`${this.windowID}-select-tab`, id);
         this.selected = this.getTabById(id);
     }
 
     @action
     public destroyTab = (id: string) => {
-        ipcRenderer.send('destroy-tab', id);
+        ipcRenderer.send(`${this.windowID}-destroy-tab`, id);
 
         const tab = this.getTabById(id);
         if (!tab)
@@ -39,7 +40,7 @@ class Store {
         this.lastClosed.push(tab);
 
         if (this.tabs.length - 1 < 1)
-            remote.app.quit()
+            remote.getCurrentWindow().close()
         else {
 
             const indexOfTab = this.tabs.indexOf(tab);

@@ -14,7 +14,7 @@ class Tab {
     public id: string = v4();
 
     constructor({ url = NEWTAB_URL, incognito, selected = true }: createTabProps) {
-        ipcRenderer.send('create-tab', {
+        ipcRenderer.send(`${Store.windowID}-create-tab`, {
             id: this.id,
             url, 
             selected, 

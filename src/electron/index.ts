@@ -18,8 +18,8 @@ else {
         app.disableHardwareAcceleration();
 
     app.on('ready', () => {
-        if (process.env.RUN_FROM_NPM) 
-            options.set('verified', false).write();
+        // if (process.env.RUN_FROM_NPM) 
+            // options.set('verified', false).write();
         window = new AppWindow();
 
         window.onInstallationEnd((newWindow: AppWindow) => window = newWindow)

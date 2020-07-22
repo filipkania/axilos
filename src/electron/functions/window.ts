@@ -4,6 +4,8 @@ import { format } from 'url';
 
 import useStorage from './useStorage';
 import Lowdb from 'lowdb';
+// @ts-ignore
+import { v4 } from 'uuid';
 import { isDev } from '../../constants/info';
 
 import firstRunMenu from '../menus/firstRun';
@@ -24,15 +26,17 @@ class AppWindow {
     public views: View[] = [];
     public selected: string;
 
-    constructor() {
+    public id: string = v4();
+
+    constructor(data?: { width:number, height:number }) {
         this.storage = useStorage('options');
 
         let { height, width, x, y } = this.storage.get('user.options.bounds').value(),
             firstRun:boolean = this.isFirstRun();
 
         this.window = new BrowserWindow({
-            height: firstRun ? installationSettings.height : height,
-            width: firstRun ? installationSettings.width : width,
+            height: data?.height ? data.height : firstRun ? installationSettings.height : height,
+            width: data?.width ? data.width : firstRun ? installationSettings.width : width,
             x: firstRun ? undefined : x,
             y: firstRun ? undefined : y,
             transparent: true,
@@ -90,7 +94,7 @@ class AppWindow {
                 pathname: join(app.getAppPath(), `/build/overlay.html`),
                 protocol: 'file:',
                 slashes: true
-            }));
+            }) + `?id=${this.id}`);
 
             this.registerEventListeners();
         }

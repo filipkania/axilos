@@ -9,8 +9,7 @@ const startRecieving = (newWindow: AppWindow) => {
     window = newWindow;
 
     TabsListeners(window);
-
-    ipcMain.on('create-window', () => new AppWindow());
+    ipcMain.on(`${window.id}-create-window`, (_, data: { height: number, width: number }) => new AppWindow(data));
 };
 
 export default startRecieving;
